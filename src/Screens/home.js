@@ -2,7 +2,7 @@ import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import CustomButton from "../components/customButton";
 
-const NoteCard = ({item, setCurrentPage}) => (
+const NoteCard = ({item, setCurrentPage, deleteNote, updateNote}) => (
     <View style={styles.card}>
         <Text style={styles.cardTitle}>{item.title}</Text>
         <Text>{item.desc}</Text>
@@ -13,7 +13,8 @@ const NoteCard = ({item, setCurrentPage}) => (
                 text="Ubah"
                 fontSize={12}
                 width={100}
-                onPress={() => {
+                onPress={({}) => {
+                    updateNote(item);
                     setCurrentPage('edit');
                 }}
             />
@@ -23,13 +24,15 @@ const NoteCard = ({item, setCurrentPage}) => (
                 text="Hapus"
                 fontSize={12}
                 width={100}
-                onPress={() => {}}
+                onPress={() => {
+                    deleteNote(item.id);
+                }}
             />
         </View>
     </View>
 )
 
-const Home = ({noteList, setCurrentPage}) => (
+const Home = ({noteList, setCurrentPage, deleteNote, updateNote}) => (
     <View style={styles.container}>
         <CustomButton
             backgroundColor="#DDD"
@@ -46,7 +49,9 @@ const Home = ({noteList, setCurrentPage}) => (
         renderItem={({item}) => (
         <NoteCard 
             setCurrentPage={setCurrentPage} 
-            item={item} />
+            item={item} 
+            deleteNote={deleteNote}
+            updateNote={updateNote}/>
         )}
         keyExtractor={(item) => item.id}
         />
@@ -59,6 +64,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         padding: 20,
+        marginTop: 20,
     },
     card: {
         padding: 10,

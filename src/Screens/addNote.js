@@ -37,6 +37,7 @@ const AddNote = ({setCurrentPage, addNote}) => {
                         addNote(title, desc)
                         setCurrentPage('home')
                     }}
+                    disabled={title === ""} 
                 />
             </View>
             <View style={styles.spacerTop}>

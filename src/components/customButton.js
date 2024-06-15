@@ -8,6 +8,7 @@ const CustomButton = ({
   onPress,
   fontSize = 16,
   width = 120,
+  ...props
 }) => {
   const styles = StyleSheet.create({
     button: {
@@ -24,7 +25,7 @@ const CustomButton = ({
   })
 
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
+    <TouchableOpacity style={styles.button} onPress={onPress} {...props}>
       <Text style={styles.buttonText}>{text}</Text>
     </TouchableOpacity>
   )
